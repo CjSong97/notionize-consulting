@@ -31,7 +31,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         <div className="relative w-full h-72 rounded-xl overflow-hidden mb-8">
           <Image
-            src={post?.cover?.external?.url || "/default-cover.jpg"}
+            src={post?.cover || "/default-cover.jpg"}
             alt={post.title}
             fill
             className="object-cover"

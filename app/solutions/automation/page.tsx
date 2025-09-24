@@ -1,7 +1,6 @@
 "use client";
 
 import { Zap, Bot, Cpu, BarChart, ArrowRight, Check, Code, Database, LayoutGrid, MessageSquare, Mail, Calendar, FileText, Users } from "lucide-react";
-import Link from "next/link";
 
 export default function AutomationSolutions() {
   const services = [
@@ -266,7 +265,7 @@ export default function AutomationSolutions() {
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">How long does implementation take?</h3>
             <p className="mt-2 text-gray-600 dark:text-gray-300">
-              Most automations can be set up within 1-2 weeks, depending on complexity. We'll provide a detailed timeline after our initial consultation.
+              Most automations can be set up within 1-2 weeks, depending on complexity. We&apos;ll provide a detailed timeline after our initial consultation.
             </p>
           </div>
 

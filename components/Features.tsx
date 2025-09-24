@@ -62,7 +62,7 @@ const Features = () => {
                 Get expert insights into optimizing your Notion workspace for maximum efficiency.
               </p>
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 mb-6">
-                <h4 className="font-medium text-gray-900 dark:text-white mb-2">What's Included:</h4>
+                <h4 className="font-medium text-gray-900 dark:text-white mb-2">What&apos;s Included:</h4>
                 <ol className="list-decimal list-inside space-y-2 text-sm text-gray-600 dark:text-gray-300 text-left">
                   <li>Comprehensive audit template</li>
                   <li>Discovery checklist</li>

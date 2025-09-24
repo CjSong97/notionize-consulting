@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MessageSquare, FileText, Zap, Check, ArrowRight } from "lucide-react";
+import { Mail, MessageSquare, FileText, Zap, ArrowRight } from "lucide-react";
 
 export default function ContactPage() {
   const [activeTab, setActiveTab] = useState("general");
@@ -56,7 +56,7 @@ export default function ContactPage() {
         throw new Error("Failed to send message");
       }
     } catch (error) {
-      setStatus("Failed to send message. Please try again later.");
+      setStatus("Failed to send message. Please try again later." +  error);
     }
   };
 
@@ -72,7 +72,7 @@ export default function ContactPage() {
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Let's Work Together
+            Let&apos;s Work Together
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Get in touch to discuss how we can help optimize your Notion workspace
@@ -266,7 +266,7 @@ export default function ContactPage() {
             </div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Email Us</h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Send us an email and we'll get back to you within 24 hours.
+              Send us an email and we&apos;ll get back to you within 24 hours.
             </p>
             <a
               href="mailto:notionizeconsulting@gmail.com"

@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Check, Zap, Clock, Users, BookOpen, MessageSquare } from "lucide-react";
+import { Check, Zap, Users, BookOpen } from "lucide-react";
 
 export default function TemplateSolutions() {
   const templates = [
@@ -143,7 +142,7 @@ export default function TemplateSolutions() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Custom Solutions</h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Need something more tailored to your business? We've got you covered.
+              Need something more tailored to your business? We&apos;ve got you covered.
             </p>
           </div>
 
@@ -180,7 +179,7 @@ export default function TemplateSolutions() {
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-3xl font-bold mb-6">Ready to transform your business with Notion?</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Whether you need a template, custom solution, or expert guidance, we're here to help.
+            Whether you need a template, custom solution, or expert guidance, we&apos;re here to help.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
@@ -209,7 +208,7 @@ export default function TemplateSolutions() {
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">How do I access the templates after purchase?</h3>
             <p className="mt-2 text-gray-600 dark:text-gray-300">
-              After completing your purchase, you'll receive an email with a link to duplicate the template to your Notion workspace. 
+              After completing your purchase, you&apos;ll receive an email with a link to duplicate the template to your Notion workspace. 
               You can also access all your purchased templates through your account on our website.
             </p>
           </div>
@@ -225,8 +224,8 @@ export default function TemplateSolutions() {
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Do you offer refunds?</h3>
             <p className="mt-2 text-gray-600 dark:text-gray-300">
-              Due to the digital nature of our products, we don't offer refunds on template purchases. 
-              However, if you're not satisfied with your purchase, please contact us and we'll do our best to make it right.
+              Due to the digital nature of our products, we don&apos;t offer refunds on template purchases. 
+              However, if you&apos;re not satisfied with your purchase, please contact us and we&apos;ll do our best to make it right.
             </p>
           </div>
         </div>

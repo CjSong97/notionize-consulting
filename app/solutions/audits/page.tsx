@@ -1,5 +1,4 @@
-import { Search, Zap, LayoutDashboard, Database, Lightbulb, Clock, Check, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Search, Zap, LayoutDashboard, Database, Lightbulb, Check, ArrowRight } from "lucide-react";
 
 export default function AuditSolutions() {
   const auditTypes = [
@@ -91,7 +90,7 @@ export default function AuditSolutions() {
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Why Get a Notion Audit?</h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Most teams use only 20% of Notion's potential. We'll help you unlock the other 80%.
+            Most teams use only 20% of Notion&apos;s potential. We&apos;ll help you unlock the other 80%.
           </p>
         </div>
 
@@ -112,7 +111,7 @@ export default function AuditSolutions() {
             </div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Expert Insights</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              Get personalized recommendations from Notion experts who've helped 100+ businesses.
+              Get personalized recommendations from Notion experts who&apos;ve helped 100+ businesses.
             </p>
           </div>
 
@@ -247,7 +246,7 @@ export default function AuditSolutions() {
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">What happens during the audit call?</h3>
             <p className="mt-2 text-gray-600 dark:text-gray-300">
-              We'll screen share your Notion workspace and go through your current setup. You'll get immediate feedback and we'll implement quick wins on the spot. The session is recorded for your reference.
+              We&apos;ll screen share your Notion workspace and go through your current setup. You&apos;ll get immediate feedback and we&apos;ll implement quick wins on the spot. The session is recorded for your reference.
             </p>
           </div>
 

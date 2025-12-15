@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MessageSquare, FileText, Zap, ArrowRight } from "lucide-react";
+import { Mail, MessageSquare, FileText, Zap, ArrowRight, HelpCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function ContactPage() {
   const [activeTab, setActiveTab] = useState("general");
@@ -14,7 +15,11 @@ export default function ContactPage() {
     budget: "",
     timeline: "",
   });
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState<{ type: 'idle' | 'loading' | 'success' | 'error'; message: string }>({ 
+    type: 'idle', 
+    message: '' 
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -26,10 +31,30 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("Sending...");
+    
+    // Basic validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setStatus({ 
+        type: 'error', 
+        message: 'Please fill in all required fields.' 
+      });
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setStatus({ 
+        type: 'error', 
+        message: 'Please enter a valid email address.' 
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setStatus({ type: 'loading', message: 'Sending your message...' });
 
     try {
-      // Replace with your form submission logic
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -41,22 +66,35 @@ export default function ContactPage() {
         }),
       });
 
-      if (response.ok) {
-        setStatus("Message sent successfully!");
-        setFormData({
-          name: "",
-          email: "",
-          message: "",
-          auditType: "",
-          templateType: "",
-          budget: "",
-          timeline: "",
-        });
-      } else {
-        throw new Error("Failed to send message");
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
       }
+
+      // Reset form on success
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+        auditType: "",
+        templateType: "",
+        budget: "",
+        timeline: "",
+      });
+      
+      setStatus({ 
+        type: 'success', 
+        message: 'Message sent successfully! We\'ll get back to you soon.' 
+      });
     } catch (error) {
-      setStatus("Failed to send message. Please try again later." +  error);
+      console.error('Submission error:', error);
+      setStatus({ 
+        type: 'error', 
+        message: 'Failed to send message. Please try again later or email us directly.' 
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -240,18 +278,42 @@ export default function ContactPage() {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center"
+                  disabled={isSubmitting}
+                  className={`w-full md:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg transition-opacity flex items-center justify-center ${
+                    isSubmitting 
+                      ? 'opacity-75 cursor-not-allowed' 
+                      : 'hover:opacity-90'
+                  }`}
                 >
-                  {activeTab === "audit" ? "Request Audit" : 
-                   activeTab === "template" ? "Get Custom Quote" : "Send Message"}
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      {activeTab === "audit" ? "Request Audit" : 
+                       activeTab === "template" ? "Get Custom Quote" : "Send Message"}
+                      <ArrowRight className="ml-2 w-5 h-5" />
+                    </>
+                  )}
                 </button>
-                {status && (
-                  <p className={`mt-3 text-sm ${
-                    status.includes("success") ? "text-green-600 dark:text-green-400" : "text-gray-600 dark:text-gray-400"
-                  }`}>
-                    {status}
-                  </p>
+                
+                {status.type !== 'idle' && (
+                  <div 
+                    className={`mt-3 p-3 rounded-lg text-sm ${
+                      status.type === 'success' 
+                        ? 'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400' 
+                        : status.type === 'error'
+                          ? 'bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400'
+                          : 'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
+                    }`}
+                  >
+                    {status.message}
+                  </div>
                 )}
               </div>
             </form>
@@ -293,19 +355,16 @@ export default function ContactPage() {
 
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400">
-              <Zap className="w-6 h-6" />
+              <HelpCircle className="w-6 h-6" />
             </div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Quick Help</h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Browse our help center for instant answers to common questions.
+              Browse our FAQ for instant answers to common questions.
             </p>
-            <a
-              href="/faq"
-              className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center"
-            >
-              Visit Help Center
+            <Link href="/faq" className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+              Visit FAQ
               <ArrowRight className="ml-1 w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

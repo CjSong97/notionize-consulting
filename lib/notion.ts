@@ -30,11 +30,11 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     sorts: [
       {
         property: "publishDate",
-        direction: "descending",
+        direction: "ascending",
       },
     ],
   });
-
+  console.log(response.results);
   return response.results
     .filter((page): page is PageObjectResponse => 
       page.object === "page" && "properties" in page
